@@ -61,7 +61,7 @@ public class CircleL
   {
   	r=r*scale;
 		float angdegSpan=360.0f/n;	//顶角的度数
-		vCount=3*n;//顶点个数，共有n个三角形，每个三角形都有三个顶点
+		vCount=2*n;//顶点个数，共有n个三角形，每个三角形都有三个顶点
 		
 		float[] vertices=new float[vCount*3];//坐标数据
 		float[] colors=new float[vCount*4];//顶点颜色数组
@@ -73,17 +73,17 @@ public class CircleL
 			double angrad=Math.toRadians(angdeg);//当前弧度
 			double angradNext=Math.toRadians(angdeg+angdegSpan);//下一弧度
 			//中心点
-			vertices[count++]=0;//顶点坐标
-			vertices[count++]=0; 
-			vertices[count++]=0;
+			//vertices[count++]=0;//顶点坐标
+			//vertices[count++]=0; 
+			//vertices[count++]=0;
 			
-			colors[colorCount++]=1;
-			colors[colorCount++]=1;
-			colors[colorCount++]=1;
-			colors[colorCount++]=1;
+			//colors[colorCount++]=1;
+			//colors[colorCount++]=1;
+			//colors[colorCount++]=1;
+			//colors[colorCount++]=1;
 			//当前点
-			vertices[count++]=(float) (-r*Math.sin(angrad));//顶点坐标
-			vertices[count++]=(float) (r*Math.cos(angrad));
+			vertices[count++]=(float) (-r*Math.sin(angrad));//顶点坐标 y
+			vertices[count++]=(float) (r*Math.cos(angrad));//x
 			vertices[count++]=0;
 			
 			
@@ -92,7 +92,7 @@ public class CircleL
 			colors[colorCount++]=1;
 			colors[colorCount++]=1;
 			//下一点
-			vertices[count++]=(float) (-r*Math.sin(angradNext));//顶点坐标
+			vertices[count++]=(float) (-r*Math.sin(angradNext));//顶点坐标 
 			vertices[count++]=(float) (r*Math.cos(angradNext));
 			vertices[count++]=0;
 			
@@ -159,8 +159,8 @@ public class CircleL
   
   public void drawSelf()
   {        
-  	 //制定使用某套shader程序
-  	 GLES20.glUseProgram(mProgram);        
+  	   //制定使用某套shader程序
+  	   GLES20.glUseProgram(mProgram);        
        
        //将最终变换矩阵传入shader程序
        GLES20.glUniformMatrix4fv(muMVPMatrixHandle, 1, false, MatrixState.getFinalMatrix(), 0);

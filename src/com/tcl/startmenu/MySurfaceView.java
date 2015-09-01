@@ -42,6 +42,7 @@ public class MySurfaceView extends GLSurfaceView {
 	private class SceneRenderer implements GLSurfaceView.Renderer{
 		Circle circle;
 		CircleL circleL;
+		
 		/* (non-Javadoc)
 		 * @see android.opengl.GLSurfaceView.Renderer#onDrawFrame(javax.microedition.khronos.opengles.GL10)
 		 */
@@ -54,6 +55,7 @@ public class MySurfaceView extends GLSurfaceView {
             //保护现场
             MatrixState.pushMatrix();
             MatrixState.translate(0, 0, -10);
+            MatrixState.scale(Constant.sacleX, Constant.sacleY, Constant.sacleZ);
             //circle.drawSelf(textureId);
             circleL.drawSelf();
             MatrixState.popMatrix();
@@ -119,7 +121,7 @@ public class MySurfaceView extends GLSurfaceView {
             //加载纹理
             textureId = initTexture(R.drawable.menu_robot);
             circle = new Circle(MySurfaceView.this, 1, 1.6f, 36);
-            circleL=new CircleL(MySurfaceView.this,1, 1.6f, 36);
+            circleL= new CircleL(MySurfaceView.this,1, 1.6f, 36);
 		}
 		
 	}
