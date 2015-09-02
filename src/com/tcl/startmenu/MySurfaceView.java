@@ -16,6 +16,8 @@ import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.GLUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
 
 /**
  * @Project StartMenu	
@@ -26,7 +28,12 @@ public class MySurfaceView extends GLSurfaceView {
 	
 	int textureId;
 	private SceneRenderer mRenderer;
-	boolean lightFlag=true;	
+	boolean lightFlag=true;
+	private float speedX;
+	private float speedY;
+	boolean reset = true;
+	private float countX;
+	private float countY;
 	/**
 	 * @param context
 	 */	
@@ -53,12 +60,51 @@ public class MySurfaceView extends GLSurfaceView {
             GLES20.glClear( GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);   
             
             //保护现场
+            
+            if (speedY < 4.5f) {
+            	if (reset) {
+            		countX = ((float)Math.random() * 10)/50;
+            		countY = ((float)Math.random() * 10)/50;
+                	Log.e("SPEED", "SPEEDX = " + countX);
+                	Log.e("SPEED", "SPEEDY = " + countY);
+				}
+            	reset = false;
+            	MatrixState.pushMatrix();
+                MatrixState.translate(speedX, speedY, -10);            
+                MatrixState.scale(Constant.sacleX, Constant.sacleY, Constant.sacleZ);
+                //circle.drawSelf(textureId);
+                circleL.drawSelf();
+                MatrixState.popMatrix();
+                speedX +=countX;
+                speedY +=countY;
+			}else{
+				
+				Log.e("SPEED", "SPEED = " + speedY);
+				speedX = 0;
+				speedY = 0;
+				reset = true;
+				MatrixState.pushMatrix();
+                MatrixState.translate(-360, -640, -10);            
+                MatrixState.scale(Constant.sacleX, Constant.sacleY, Constant.sacleZ);
+                //circle.drawSelf(textureId);
+                circleL.drawSelf();
+                MatrixState.popMatrix();
+			}
+        	  
+                           
+                
+            
+            
+            /*
             MatrixState.pushMatrix();
             MatrixState.translate(0, 0, -10);
             MatrixState.scale(Constant.sacleX, Constant.sacleY, Constant.sacleZ);
             //circle.drawSelf(textureId);
             circleL.drawSelf();
             MatrixState.popMatrix();
+            */
+            
+            
 		}
 
 		/* (non-Javadoc)
@@ -125,6 +171,8 @@ public class MySurfaceView extends GLSurfaceView {
 		}
 		
 	}
+	
+	
 	public int initTexture(int drawableId)//textureId
 	{
 		//生成纹理ID

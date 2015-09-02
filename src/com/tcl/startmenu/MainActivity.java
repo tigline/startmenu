@@ -4,6 +4,8 @@ package com.tcl.startmenu;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -49,6 +51,14 @@ public class MainActivity extends Activity {
 				public void onStopTrackingTouch(SeekBar seekBar) { }            	
             }
         );
+        
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+    	
+    	Constant.SCREEN_WIDTH=dm.widthPixels;
+    	Constant.SCREEN_HEIGHT=dm.heightPixels;
+    	
+    	Log.d("SCREEN_WIDTH", "SCREEN_WIDTH = " + Constant.SCREEN_WIDTH);
+    	Log.d("SCREEN_HEIGHT", "SCREEN_HEIGHT = " + Constant.SCREEN_HEIGHT);
         
     }
     

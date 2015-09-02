@@ -3,6 +3,7 @@
  */
 package com.tcl.startmenu;
 
+
 /**
  * @Project StartMenu	
  * @author houxb
@@ -20,5 +21,9 @@ public class Constant
     public static float sacleX = 1.0f;
     public static float sacleY = 1.0f;
     public static float sacleZ = 1.0f;
+    
+	
+    public static float SCREEN_WIDTH;
+    public static float SCREEN_HEIGHT;
 }
 
